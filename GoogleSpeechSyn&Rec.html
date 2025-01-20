@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vraunz Speech Recognition</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+   
+    
+    
+    
     <style>
         body {
             font-family: 'Helvetica Neue', sans-serif;
@@ -111,45 +113,40 @@
                 padding: 20px;
             }
         }
-
-        /* New CSS for Animation Effect */
         .slide-in {
             animation: slide-in 0.5s forwards;
         }
+                @keyframes slide-in {
+                    from {
+                        transform: translateX(-100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
 
-        @keyframes slide-in {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
+        
     </style>
 </head>
 <body>
-    <h1 class="display-4">Vraunz Speech Recog</h1>
-    <button type="button" id="toggle-listening" class="btn">
-        <i class="fas fa-microphone mic-icon"></i> Start Listening
-    </button>
-    <div class="output-box" id="output-box">
-        <h5>Recognized Text:</h5>
-        <p id="recognized-text">Click "Start Listening" and then speak to see processed text!</p>
-    </div>
-
+<h1 class="display-4">Vraunz Speech Recog</h1>
+<button type="button" id="toggle-listening" class="btn">
+<i class="fas fa-microphone mic-icon"></i> Start Listening
+</button>
+<div class="output-box" id="output-box">
+<h5>Recognized Text:</h5>
+<p id="recognized-text">Click "Start Listening" and then speak to see processed text!</p>
+</div>
     <script>
         let isListening = false;
         const toggleButton = document.getElementById('toggle-listening');
         const recognizedTextElement = document.getElementById('recognized-text');
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-        // Configure SpeechRecognition
         recognition.lang = 'en-US';
         recognition.continuous = false;
         recognition.interimResults = false;
-
         toggleButton.addEventListener('click', function() {
             isListening = !isListening;
             if (isListening) {
@@ -162,7 +159,6 @@
                 stopListening();
             }
         });
-
         function startListening() {
             recognition.start();
             recognition.onresult = function(event) {
@@ -170,22 +166,21 @@
                 recognizedTextElement.innerHTML = transcript;
                 textToSpeech(transcript);
             };
-
             recognition.onerror = function(event) {
                 recognizedTextElement.innerHTML = "Error occurred: " + event.error;
             };
         }
-
         function stopListening() {
             recognition.stop();
             recognizedTextElement.innerHTML = "Listening stopped. Processing Speech to Text.";
         }
-
-        // Function to convert text to speech
         function textToSpeech(text) {
             const utterance = new SpeechSynthesisUtterance(text);
             speechSynthesis.speak(utterance);
         }
+    
+    
+    
     </script>
 </body>
 </html>
