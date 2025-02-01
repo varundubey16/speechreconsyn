@@ -1,9 +1,9 @@
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vraunz Speech Recognition</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vraunz Speech Recognitio</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
    
     
     
@@ -116,6 +116,9 @@
         .slide-in {
             animation: slide-in 0.5s forwards;
         }
+
+
+        
                 @keyframes slide-in {
                     from {
                         transform: translateX(-100%);
@@ -128,7 +131,7 @@
                 }
 
         
-    </style>
+</style>
 </head>
 <body>
 <h1 class="display-4">Vraunz Speech Recog</h1>
@@ -139,48 +142,54 @@
 <h5>Recognized Text:</h5>
 <p id="recognized-text">Click "Start Listening" and then speak to see processed text!</p>
 </div>
-    <script>
-        let isListening = false;
-        const toggleButton = document.getElementById('toggle-listening');
-        const recognizedTextElement = document.getElementById('recognized-text');
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = 'en-US';
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        toggleButton.addEventListener('click', function() {
-            isListening = !isListening;
-            if (isListening) {
-                toggleButton.innerHTML = '<i class="fas fa-microphone-slash mic-icon"></i> Stop Listening';
-                toggleButton.classList.add('breathing');
-                startListening();
-            } else {
-                toggleButton.innerHTML = '<i class="fas fa-microphone mic-icon"></i> Start Listening';
-                toggleButton.classList.remove('breathing');
-                stopListening();
-            }
-        });
-        function startListening() {
-            recognition.start();
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript;
-                recognizedTextElement.innerHTML = transcript;
-                textToSpeech(transcript);
-            };
-            recognition.onerror = function(event) {
-                recognizedTextElement.innerHTML = "Error occurred: " + event.error;
-            };
+<script>
+    let isListening = false;
+    const toggleButton = document.getElementById('toggle-listening');
+    const recognizedTextElement = document.getElementById('recognized-text');
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    toggleButton.addEventListener('click', function() {
+        isListening = !isListening;
+        if (isListening) {
+            toggleButton.innerHTML = '<i class="fas fa-microphone-slash mic-icon"></i> Stop Listening';
+            toggleButton.classList.add('breathing');
+            startListening();
+        } else {
+            toggleButton.innerHTML = '<i class="fas fa-microphone mic-icon"></i> Start Listening';
+            toggleButton.classList.remove('breathing');
+            stopListening();
         }
-        function stopListening() {
-            recognition.stop();
-            recognizedTextElement.innerHTML = "Listening stopped. Processing Speech to Text.";
-        }
-        function textToSpeech(text) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            speechSynthesis.speak(utterance);
-        }
+    });
+    function startListening() {
+        recognition.start();
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            recognizedTextElement.innerHTML = transcript;
+            textToSpeech(transcript);
+        };
+        recognition.onerror = function(event) {
+            recognizedTextElement.innerHTML = "Error occurred: " + event.error;
+        };
+    }
+    function stopListening() {
+        recognition.stop();
+        recognizedTextElement.innerHTML = "Listening stopped. Processing Speech to Text.";
+    }
+    function textToSpeech(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance);
+    }
     
     
     
     </script>
+
+
+
+
+
+    
 </body>
 </html>
