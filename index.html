@@ -2,7 +2,7 @@
 ```<html
 <head>
 <title>Speech Recognition</title>
-<style>
+<!--<style>
 
 body{
 font-family: Arial;
@@ -28,11 +28,61 @@ margin-left:auto;
 margin-right:auto;
 padding:20px;
 }
-</style>
-</head>
-<body>
+</style>-->
+<style>
+body{
+    transition:0.3s;
+}
+.light-theme{
+    background:#f5f5f5;
+    /*background:#f3f5f3;*/
+    color:black;
+}
+
+.dark-theme{
+    background:#202124;
+    color:white;
+}
+
+.theme-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    cursor:pointer;
+    font-size:24px;
+}
+
+.speech-box{
+    width:600px;
+    margin:auto;
+    margin-top:40px;
+    padding:25px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+    background:white;
+}
 
     
+.dark-theme .speech-box{
+    background:#2d2d2d;
+    border:1px solid #444;
+}
+/*.dark-theme .speech-box{
+    background:#1d5d1d;
+    border:1.1px solid #445;
+}*/
+#recognized-text{
+    min-height:80px;
+    font-size:18px;
+}
+
+button{
+    margin-top:20px;
+}   
+</style>    
+</head>
+<body>    
 <h1>Speech Recognition</h1>
 <button id="listenButton">Start Listening</button>
 <div id="output">
@@ -41,7 +91,7 @@ padding:20px;
 </div>
 
     
-    <!--version2, fixed the bug over too soon, cuzapi rate-->
+    <!--version2, fixed the bug listening too soon over, cuzofrate-->
     <script>
 let listening = false;
 const button = document.getElementById("listenButton");
@@ -73,6 +123,29 @@ recognition.onresult = function(event){
 recognition.onerror = function(){
     text.innerHTML = "Error";
 }
+
+//new darklightmode
+let dark = false;
+
+themeButton.onclick = function(){
+
+    dark = !dark;
+
+    if(dark){
+
+        document.body.className = "dark-theme";
+        themeButton.innerHTML = "☀";
+
+    }
+
+    else{
+
+        document.body.className = "light-theme";
+        themeButton.innerHTML = "🌙";
+
+    }
+
+}        
 </script>
 </body
 </html>
