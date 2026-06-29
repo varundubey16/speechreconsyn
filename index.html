@@ -1,114 +1,78 @@
-```html
-<!DOCTYPE html>
 <html>
-
+```<html
 <head>
+<title>Speech Recognition</title>
+<style>
 
-    <title>Speech Recognition</title>
+body{
+font-family: Arial;
+text-align: center;
+background-color: lightblue;
+margin-top:50px;
+}
+h1{
+color: blue;
+}
 
-    <style>
-
-        body{
-            font-family: Arial;
-            text-align: center;
-            background-color: lightblue;
-            margin-top:50px;
-        }
-
-        h1{
-            color: blue;
-        }
-
-        button{
-            padding:10px;
-            font-size:18px;
-        }
-
-        #output{
-            margin-top:30px;
-            border:1px solid black;
-            background:white;
-            width:500px;
-            margin-left:auto;
-            margin-right:auto;
-            padding:20px;
-        }
-
-    </style>
-
+    
+button{
+padding:10px;
+font-size:18px;
+}
+#output{
+margin-top:30px;
+border:1px solid black;
+background:white;
+width:500px;
+margin-left:auto;
+margin-right:auto;
+padding:20px;
+}
+</style>
 </head>
-
 <body>
 
+    
 <h1>Speech Recognition</h1>
-
 <button id="listenButton">Start Listening</button>
-
 <div id="output">
-
 <h3>Recognized Text</h3>
-
 <p id="text">Speak something...</p>
-
 </div>
 
-<script>
-
+    
+    <!--version2, fixed the bug over too soon, cuzapi rate-->
+    <script>
 let listening = false;
-
 const button = document.getElementById("listenButton");
-
+        //const button = document.getElementById("listenAnimation");removed
 const text = document.getElementById("text");
-
 const recognition = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
-
 recognition.lang = "en-US";
-
+//recognition.lang = "en-IN";
 button.onclick = function(){
-
     if(listening == false){
-
         recognition.start();
-
         listening = true;
-
         button.innerHTML = "Stop Listening";
-
     }
-
     else{
-
         recognition.stop();
-
         listening = false;
-
         button.innerHTML = "Start Listening";
-
     }
-
 }
 
+//removed full logic listen animation        
 recognition.onresult = function(event){
-
     let speech = event.results[0][0].transcript;
-
     text.innerHTML = speech;
-
     let voice = new SpeechSynthesisUtterance(speech);
-
     speechSynthesis.speak(voice);
-
 }
-
 recognition.onerror = function(){
-
     text.innerHTML = "Error";
-
 }
-
 </script>
-
-</body>
-
+</body
 </html>
-```
