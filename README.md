@@ -1,1 +1,1 @@
-Speech recog and synthesis using only frontend nd webspeech api
+Speech recog and synthesis using owebspeechapi
